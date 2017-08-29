@@ -3,6 +3,8 @@
 This repo is a reference dashboard for the `flowDashboard` package: 
 https://github.com/laderast/flowDashboard. It uses the `GvHD` dataset from `flowStats`.
 
+You can see the reference dashboard in action here: https://tladeras.shinyapps.io/sampleFlowDashboard/
+
 To run it, you will need to install the `flowDashboard` package: 
 
 ```
