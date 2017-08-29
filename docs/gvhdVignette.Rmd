@@ -8,6 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 library(knitr)
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+knitr::opts_knit$set(root.dir = normalizePath("../"))
 ```
 
 ## flowDashboard Demo
@@ -59,15 +60,16 @@ Now that the `GvHD` data is gated and in a `GatingSet`, we can build the various
 
 ```{r}
 #show annotation
-pD <- pData(gs@data@phenoData)
-qcMarkers <- pD$desc[1:3]
+pD <- pData(parameters(gs@data[[1]]))
+
+qcMarkers <- pD$desc[-c(6)]
 
 #show first three markers
 qcMarkers
 
 library(flowDashboard)
 ##build QCO object
-QCO <- QCOFromGatingSet(gs,samplePop = 1000, qcMarkers = qcMarkers)
+QCO <- QCOFromGatingSet(gs,samplePop = 1000,qcMarkers = qcMarkers)
 ##show structure of qcFlowObj
 QCO
 ```

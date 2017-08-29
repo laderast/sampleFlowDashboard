@@ -173,15 +173,21 @@ recompute(gs)</code></pre>
 <h2>Building Data Objects</h2>
 <p>Now that the <code>GvHD</code> data is gated and in a <code>GatingSet</code>, we can build the various objects. First we look at the markers and pick three markers as markers for general QC. Annotation is derived from the <code>phenoData</code> slot of <code>gs@data</code>. Here, we sample our data using only 1000 points per sample, in order to save memory.</p>
 <pre class="r"><code>#show annotation
-pD &lt;- pData(gs@data@phenoData)
-qcMarkers &lt;- pD$desc[1:3]
+pD &lt;- pData(parameters(gs@data[[1]]))
+
+qcMarkers &lt;- pD$desc[-c(6)]
 
 #show first three markers
 qcMarkers</code></pre>
-<pre><code>## NULL</code></pre>
+<pre><code>##                $P1S                $P2S                $P3S 
+##        &quot;FSC-Height&quot;        &quot;SSC-Height&quot;         &quot;CD15 FITC&quot; 
+##                $P4S                $P5S                $P7S 
+##           &quot;CD45 PE&quot;        &quot;CD14 PerCP&quot;          &quot;CD33 APC&quot; 
+##                $P8S 
+## &quot;Time (51.20 sec.)&quot;</code></pre>
 <pre class="r"><code>library(flowDashboard)
 ##build QCO object
-QCO &lt;- QCOFromGatingSet(gs,samplePop = 1000, qcMarkers = qcMarkers)
+QCO &lt;- QCOFromGatingSet(gs,samplePop = 1000,qcMarkers = qcMarkers)
 ##show structure of qcFlowObj
 QCO</code></pre>
 <pre><code>## &lt;qcFlowObj&gt;
@@ -194,8 +200,8 @@ QCO</code></pre>
 ##     contextID: NULL
 ##     initialize: function (annotation, qcData, mapVar = NULL, checkIntegrity = TRUE, 
 ##     mapVar: name
-##     markers: FSC.Height SSC.Height CD15.FITC CD45.PE CD14.PerCP NA. C ...
-##     objId: QCO-JPRNF84
+##     markers: FSC.Height SSC.Height CD15.FITC CD45.PE CD14.PerCP CD33. ...
+##     objId: QCO-RDZBC93
 ##     qcData: data.table, data.frame
 ##     returnMergedData: function () 
 ##     setAnnotationDisplayOptions: function (annotCols) 
@@ -214,7 +220,7 @@ QCO</code></pre>
 </ul>
 <p>Note that <code>QCO</code> has a slot called <code>objId</code>. This is the identifier used when using <code>QCO</code> in one of <code>flowDashboard</code>’s shiny modules. Having unique identfiers for each object helps to avoid namespace collisions in the shiny modules. By default, the identifer is randomly generated, though the user can override the default, either by specifying <code>objId</code> as an argument in the <code>QCOfromGatingSet()</code> function, or when invoking the modules separately. This <code>objId</code> lets the <code>flowDashboard</code> modules work together, or work separately (more on that later).</p>
 <pre class="r"><code>QCO$objId</code></pre>
-<pre><code>## [1] &quot;QCO-JPRNF84&quot;</code></pre>
+<pre><code>## [1] &quot;QCO-RDZBC93&quot;</code></pre>
 <p>If we use the <code>returnMergedData()</code> method, we can see the underlying merged data/annotation. We keep these two data tables separate in order to save space (avoiding redundant information), and because different display methods require either the annotation or the underlying data.</p>
 <pre class="r"><code>kable(QCO$returnMergedData()[1:15,])</code></pre>
 <table>
@@ -233,7 +239,7 @@ QCO</code></pre>
 <tr class="odd">
 <td align="left">s5a01</td>
 <td align="left">FSC.Height</td>
-<td align="right">756</td>
+<td align="right">92</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -242,97 +248,7 @@ QCO</code></pre>
 <tr class="even">
 <td align="left">s5a01</td>
 <td align="left">FSC.Height</td>
-<td align="right">331</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">230</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">302</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">131</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">600</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">91</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">206</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">177</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">152</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">142</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">339</td>
+<td align="right">338</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -350,7 +266,7 @@ QCO</code></pre>
 <tr class="even">
 <td align="left">s5a01</td>
 <td align="left">FSC.Height</td>
-<td align="right">208</td>
+<td align="right">344</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -359,7 +275,97 @@ QCO</code></pre>
 <tr class="odd">
 <td align="left">s5a01</td>
 <td align="left">FSC.Height</td>
-<td align="right">60</td>
+<td align="right">69</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="left">FSC.Height</td>
+<td align="right">624</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="left">FSC.Height</td>
+<td align="right">184</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="left">FSC.Height</td>
+<td align="right">314</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="left">FSC.Height</td>
+<td align="right">371</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="left">FSC.Height</td>
+<td align="right">313</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="left">FSC.Height</td>
+<td align="right">99</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="left">FSC.Height</td>
+<td align="right">246</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="left">FSC.Height</td>
+<td align="right">404</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="left">FSC.Height</td>
+<td align="right">505</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="left">FSC.Height</td>
+<td align="right">119</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -628,7 +634,7 @@ GO</code></pre>
 ##     imageDir: data/gating/
 ##     initialize: function (annotation, popTable, mapVar = NULL, gates = NULL, 
 ##     mapVar: name
-##     objId: GO-SAJNW96
+##     objId: GO-UPCWK13
 ##     popSubsets: list
 ##     popTable: data.table, data.frame
 ##     populations: rectangle CD15 FITC-CD45 PE+ CD15 FITC+CD45 PE+ CD15 FIT ...
@@ -669,7 +675,7 @@ GO</code></pre>
 <td align="left">root</td>
 <td align="right">97</td>
 <td align="right">3420</td>
-<td align="left">s5a01+rectangle+GO-SAJNW96</td>
+<td align="left">s5a01+rectangle+GO-UPCWK13</td>
 <td align="right">2.8362573</td>
 <td align="right">0.3298607</td>
 <td align="left">s5a01+rectangle</td>
@@ -684,7 +690,7 @@ GO</code></pre>
 <td align="left">rectangle</td>
 <td align="right">0</td>
 <td align="right">97</td>
-<td align="left">s5a01+CD15 FITCnegCD45 PEpos+GO-SAJNW96</td>
+<td align="left">s5a01+CD15 FITCnegCD45 PEpos+GO-UPCWK13</td>
 <td align="right">0.0000000</td>
 <td align="right">-0.3904334</td>
 <td align="left">s5a01+CD15 FITC-CD45 PE+</td>
@@ -699,7 +705,7 @@ GO</code></pre>
 <td align="left">rectangle</td>
 <td align="right">89</td>
 <td align="right">97</td>
-<td align="left">s5a01+CD15 FITCposCD45 PEpos+GO-SAJNW96</td>
+<td align="left">s5a01+CD15 FITCposCD45 PEpos+GO-UPCWK13</td>
 <td align="right">91.7525773</td>
 <td align="right">-0.1272707</td>
 <td align="left">s5a01+CD15 FITC+CD45 PE+</td>
@@ -714,7 +720,7 @@ GO</code></pre>
 <td align="left">rectangle</td>
 <td align="right">6</td>
 <td align="right">97</td>
-<td align="left">s5a01+CD15 FITCposCD45 PEneg+GO-SAJNW96</td>
+<td align="left">s5a01+CD15 FITCposCD45 PEneg+GO-UPCWK13</td>
 <td align="right">6.1855670</td>
 <td align="right">1.0150601</td>
 <td align="left">s5a01+CD15 FITC+CD45 PE-</td>
@@ -729,7 +735,7 @@ GO</code></pre>
 <td align="left">rectangle</td>
 <td align="right">2</td>
 <td align="right">97</td>
-<td align="left">s5a01+CD15 FITCnegCD45 PEneg+GO-SAJNW96</td>
+<td align="left">s5a01+CD15 FITCnegCD45 PEneg+GO-UPCWK13</td>
 <td align="right">2.0618557</td>
 <td align="right">-0.1072787</td>
 <td align="left">s5a01+CD15 FITC-CD45 PE-</td>
@@ -744,7 +750,7 @@ GO</code></pre>
 <td align="left">root</td>
 <td align="right">54</td>
 <td align="right">3405</td>
-<td align="left">s5a02+rectangle+GO-SAJNW96</td>
+<td align="left">s5a02+rectangle+GO-UPCWK13</td>
 <td align="right">1.5859031</td>
 <td align="right">-0.1554846</td>
 <td align="left">s5a02+rectangle</td>
@@ -759,7 +765,7 @@ GO</code></pre>
 <td align="left">rectangle</td>
 <td align="right">0</td>
 <td align="right">54</td>
-<td align="left">s5a02+CD15 FITCnegCD45 PEpos+GO-SAJNW96</td>
+<td align="left">s5a02+CD15 FITCnegCD45 PEpos+GO-UPCWK13</td>
 <td align="right">0.0000000</td>
 <td align="right">-0.3904334</td>
 <td align="left">s5a02+CD15 FITC-CD45 PE+</td>
@@ -774,7 +780,7 @@ GO</code></pre>
 <td align="left">rectangle</td>
 <td align="right">46</td>
 <td align="right">54</td>
-<td align="left">s5a02+CD15 FITCposCD45 PEpos+GO-SAJNW96</td>
+<td align="left">s5a02+CD15 FITCposCD45 PEpos+GO-UPCWK13</td>
 <td align="right">85.1851852</td>
 <td align="right">-0.6216961</td>
 <td align="left">s5a02+CD15 FITC+CD45 PE+</td>
@@ -789,7 +795,7 @@ GO</code></pre>
 <td align="left">rectangle</td>
 <td align="right">1</td>
 <td align="right">54</td>
-<td align="left">s5a02+CD15 FITCposCD45 PEneg+GO-SAJNW96</td>
+<td align="left">s5a02+CD15 FITCposCD45 PEneg+GO-UPCWK13</td>
 <td align="right">1.8518519</td>
 <td align="right">-0.1657054</td>
 <td align="left">s5a02+CD15 FITC+CD45 PE-</td>
@@ -804,7 +810,7 @@ GO</code></pre>
 <td align="left">rectangle</td>
 <td align="right">7</td>
 <td align="right">54</td>
-<td align="left">s5a02+CD15 FITCnegCD45 PEneg+GO-SAJNW96</td>
+<td align="left">s5a02+CD15 FITCnegCD45 PEneg+GO-UPCWK13</td>
 <td align="right">12.9629630</td>
 <td align="right">0.8219709</td>
 <td align="left">s5a02+CD15 FITC-CD45 PE-</td>
@@ -819,7 +825,7 @@ GO</code></pre>
 <td align="left">root</td>
 <td align="right">11</td>
 <td align="right">3435</td>
-<td align="left">s5a03+rectangle+GO-SAJNW96</td>
+<td align="left">s5a03+rectangle+GO-UPCWK13</td>
 <td align="right">0.3202329</td>
 <td align="right">-0.6467750</td>
 <td align="left">s5a03+rectangle</td>
@@ -834,7 +840,7 @@ GO</code></pre>
 <td align="left">rectangle</td>
 <td align="right">0</td>
 <td align="right">11</td>
-<td align="left">s5a03+CD15 FITCnegCD45 PEpos+GO-SAJNW96</td>
+<td align="left">s5a03+CD15 FITCnegCD45 PEpos+GO-UPCWK13</td>
 <td align="right">0.0000000</td>
 <td align="right">-0.3904334</td>
 <td align="left">s5a03+CD15 FITC-CD45 PE+</td>
@@ -849,7 +855,7 @@ GO</code></pre>
 <td align="left">rectangle</td>
 <td align="right">7</td>
 <td align="right">11</td>
-<td align="left">s5a03+CD15 FITCposCD45 PEpos+GO-SAJNW96</td>
+<td align="left">s5a03+CD15 FITCposCD45 PEpos+GO-UPCWK13</td>
 <td align="right">63.6363636</td>
 <td align="right">-2.2439970</td>
 <td align="left">s5a03+CD15 FITC+CD45 PE+</td>
@@ -864,7 +870,7 @@ GO</code></pre>
 <td align="left">rectangle</td>
 <td align="right">1</td>
 <td align="right">11</td>
-<td align="left">s5a03+CD15 FITCposCD45 PEneg+GO-SAJNW96</td>
+<td align="left">s5a03+CD15 FITCposCD45 PEneg+GO-UPCWK13</td>
 <td align="right">9.0909091</td>
 <td align="right">1.8066506</td>
 <td align="left">s5a03+CD15 FITC+CD45 PE-</td>
@@ -879,7 +885,7 @@ GO</code></pre>
 <td align="left">rectangle</td>
 <td align="right">3</td>
 <td align="right">11</td>
-<td align="left">s5a03+CD15 FITCnegCD45 PEneg+GO-SAJNW96</td>
+<td align="left">s5a03+CD15 FITCnegCD45 PEneg+GO-UPCWK13</td>
 <td align="right">27.2727273</td>
 <td align="right">2.0417866</td>
 <td align="left">s5a03+CD15 FITC-CD45 PE-</td>
@@ -905,7 +911,7 @@ PEO</code></pre>
 ##     initialize: function (annotation, expressionData, mapVar = NULL, checkIntegrity = TRUE, 
 ##     mapVar: name
 ##     markers: FSC-Height SSC-Height CD15 FITC CD45 PE CD14 PerCP FL2-A ...
-##     objId: PEO-KMNJY70
+##     objId: PEO-JOWZD39
 ##     populations: rectangle CD15 FITC-CD45 PE+ CD15 FITC+CD45 PE+ CD15 FIT ...
 ##     returnMergedData: function () 
 ##     setAnnotationDisplayOptions: function (annotCols) 
