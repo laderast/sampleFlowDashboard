@@ -177,7 +177,7 @@ pD &lt;- pData(parameters(gs@data[[1]]))
 
 qcMarkers &lt;- pD$desc[-c(6)]
 
-#show first three markers
+#show markers in data
 qcMarkers</code></pre>
 <pre><code>##                $P1S                $P2S                $P3S 
 ##        &quot;FSC-Height&quot;        &quot;SSC-Height&quot;         &quot;CD15 FITC&quot; 
@@ -201,7 +201,7 @@ QCO</code></pre>
 ##     initialize: function (annotation, qcData, mapVar = NULL, checkIntegrity = TRUE, 
 ##     mapVar: name
 ##     markers: FSC.Height SSC.Height CD15.FITC CD45.PE CD14.PerCP CD33. ...
-##     objId: QCO-RDZBC93
+##     objId: QCO-RWFCG85
 ##     qcData: data.table, data.frame
 ##     returnMergedData: function () 
 ##     setAnnotationDisplayOptions: function (annotCols) 
@@ -220,13 +220,14 @@ QCO</code></pre>
 </ul>
 <p>Note that <code>QCO</code> has a slot called <code>objId</code>. This is the identifier used when using <code>QCO</code> in one of <code>flowDashboard</code>’s shiny modules. Having unique identfiers for each object helps to avoid namespace collisions in the shiny modules. By default, the identifer is randomly generated, though the user can override the default, either by specifying <code>objId</code> as an argument in the <code>QCOfromGatingSet()</code> function, or when invoking the modules separately. This <code>objId</code> lets the <code>flowDashboard</code> modules work together, or work separately (more on that later).</p>
 <pre class="r"><code>QCO$objId</code></pre>
-<pre><code>## [1] &quot;QCO-RDZBC93&quot;</code></pre>
+<pre><code>## [1] &quot;QCO-RWFCG85&quot;</code></pre>
 <p>If we use the <code>returnMergedData()</code> method, we can see the underlying merged data/annotation. We keep these two data tables separate in order to save space (avoiding redundant information), and because different display methods require either the annotation or the underlying data.</p>
 <pre class="r"><code>kable(QCO$returnMergedData()[1:15,])</code></pre>
 <table>
 <thead>
 <tr class="header">
 <th align="left">idVar</th>
+<th align="right">cellNum</th>
 <th align="left">variable</th>
 <th align="right">value</th>
 <th align="left">Patient</th>
@@ -238,78 +239,7 @@ QCO</code></pre>
 <tbody>
 <tr class="odd">
 <td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">92</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">338</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">89</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">344</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">69</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">624</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">184</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="left">FSC.Height</td>
-<td align="right">314</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
+<td align="right">1</td>
 <td align="left">FSC.Height</td>
 <td align="right">371</td>
 <td align="left">5</td>
@@ -319,8 +249,9 @@ QCO</code></pre>
 </tr>
 <tr class="even">
 <td align="left">s5a01</td>
+<td align="right">2</td>
 <td align="left">FSC.Height</td>
-<td align="right">313</td>
+<td align="right">190</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -328,8 +259,9 @@ QCO</code></pre>
 </tr>
 <tr class="odd">
 <td align="left">s5a01</td>
+<td align="right">3</td>
 <td align="left">FSC.Height</td>
-<td align="right">99</td>
+<td align="right">141</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -337,8 +269,9 @@ QCO</code></pre>
 </tr>
 <tr class="even">
 <td align="left">s5a01</td>
+<td align="right">4</td>
 <td align="left">FSC.Height</td>
-<td align="right">246</td>
+<td align="right">167</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -346,8 +279,9 @@ QCO</code></pre>
 </tr>
 <tr class="odd">
 <td align="left">s5a01</td>
+<td align="right">5</td>
 <td align="left">FSC.Height</td>
-<td align="right">404</td>
+<td align="right">128</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -355,8 +289,9 @@ QCO</code></pre>
 </tr>
 <tr class="even">
 <td align="left">s5a01</td>
+<td align="right">6</td>
 <td align="left">FSC.Height</td>
-<td align="right">505</td>
+<td align="right">208</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -364,8 +299,89 @@ QCO</code></pre>
 </tr>
 <tr class="odd">
 <td align="left">s5a01</td>
+<td align="right">7</td>
 <td align="left">FSC.Height</td>
-<td align="right">119</td>
+<td align="right">172</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="right">8</td>
+<td align="left">FSC.Height</td>
+<td align="right">236</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="right">9</td>
+<td align="left">FSC.Height</td>
+<td align="right">353</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="right">10</td>
+<td align="left">FSC.Height</td>
+<td align="right">85</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="right">11</td>
+<td align="left">FSC.Height</td>
+<td align="right">407</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="right">12</td>
+<td align="left">FSC.Height</td>
+<td align="right">233</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="right">13</td>
+<td align="left">FSC.Height</td>
+<td align="right">234</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="right">14</td>
+<td align="left">FSC.Height</td>
+<td align="right">107</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="right">15</td>
+<td align="left">FSC.Height</td>
+<td align="right">130</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -374,253 +390,12 @@ QCO</code></pre>
 </tbody>
 </table>
 <p>Here we build the <code>gatingObj</code> from the <code>GatingSet</code>. We also create all of the relevant gating plots. Note that if you have a lot of samples and a lot of gates, the plotting can take a while.</p>
-<pre class="r"><code>GO &lt;- GOFromGatingSet(gs,imageDir = &quot;data/gating/&quot;, makeGraphs = TRUE)</code></pre>
-<pre><code>## [1] &quot;s5a01&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s5a02&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s5a03&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s5a04&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s5a05&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s5a06&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s5a07&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s6a01&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s6a02&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s6a03&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s6a04&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s6a05&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s6a06&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s6a07&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s7a01&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s7a02&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s7a03&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s7a04&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s7a05&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s7a06&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s7a07&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s9a01&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s9a02&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s9a03&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s9a04&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s9a05&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s9a06&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s9a07&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s10a01&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s10a02&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s10a03&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s10a04&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s10a05&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s10a06&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;s10a07&quot;
-## [1] &quot;root&quot;
-## [1] &quot;/rectangle&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE+&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC+CD45 PE-&quot;</code></pre>
-<pre><code>## [1] &quot;/rectangle/CD15 FITC-CD45 PE-&quot;</code></pre>
-<pre class="r"><code>##show structure of gatingObj
+<pre class="r"><code>#run this code if you want to generate the images as well
+GO &lt;- GOFromGatingSet(gs,imageDir = &quot;data/gating/&quot;, makeGraphs = TRUE)</code></pre>
+<pre class="r"><code>#graphs not generated in this vignette -run the above code if you want to
+GO &lt;- GOFromGatingSet(gs,imageDir = &quot;data/gating/&quot;, makeGraphs = FALSE, objId=&quot;GO-UPCWK13&quot;)
+
+##show structure of gatingObj
 GO</code></pre>
 <pre><code>## &lt;gatingObj&gt;
 ##   Inherits from: &lt;commonDataObj&gt;
@@ -649,7 +424,7 @@ GO</code></pre>
 ##     subsetOptionList: list
 ##     subsetOptions: Patient Visit Days Grade</code></pre>
 <p>Again, we can see the merged data table from <code>GO</code> by using the <code>returnMergedData()</code> method built into <code>GO</code>:</p>
-<pre class="r"><code>kable(GO$returnMergedData()[1:15,])</code></pre>
+<pre class="r"><code>kable(GO$returnMergedData()[1:30,])</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -894,6 +669,231 @@ GO</code></pre>
 <td align="left">6</td>
 <td align="right">3</td>
 </tr>
+<tr class="even">
+<td align="left">s5a04</td>
+<td align="left">rectangle</td>
+<td align="left">root</td>
+<td align="right">33</td>
+<td align="right">8550</td>
+<td align="left">s5a04+rectangle+GO-UPCWK13</td>
+<td align="right">0.3859649</td>
+<td align="right">-0.6212600</td>
+<td align="left">s5a04+rectangle</td>
+<td align="left">5</td>
+<td align="left">4</td>
+<td align="left">12</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a04</td>
+<td align="left">CD15 FITC-CD45 PE+</td>
+<td align="left">rectangle</td>
+<td align="right">0</td>
+<td align="right">33</td>
+<td align="left">s5a04+CD15 FITCnegCD45 PEpos+GO-UPCWK13</td>
+<td align="right">0.0000000</td>
+<td align="right">-0.3904334</td>
+<td align="left">s5a04+CD15 FITC-CD45 PE+</td>
+<td align="left">5</td>
+<td align="left">4</td>
+<td align="left">12</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a04</td>
+<td align="left">CD15 FITC+CD45 PE+</td>
+<td align="left">rectangle</td>
+<td align="right">31</td>
+<td align="right">33</td>
+<td align="left">s5a04+CD15 FITCposCD45 PEpos+GO-UPCWK13</td>
+<td align="right">93.9393939</td>
+<td align="right">0.0373636</td>
+<td align="left">s5a04+CD15 FITC+CD45 PE+</td>
+<td align="left">5</td>
+<td align="left">4</td>
+<td align="left">12</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a04</td>
+<td align="left">CD15 FITC+CD45 PE-</td>
+<td align="left">rectangle</td>
+<td align="right">2</td>
+<td align="right">33</td>
+<td align="left">s5a04+CD15 FITCposCD45 PEneg+GO-UPCWK13</td>
+<td align="right">6.0606061</td>
+<td align="right">0.9810132</td>
+<td align="left">s5a04+CD15 FITC+CD45 PE-</td>
+<td align="left">5</td>
+<td align="left">4</td>
+<td align="left">12</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a04</td>
+<td align="left">CD15 FITC-CD45 PE-</td>
+<td align="left">rectangle</td>
+<td align="right">0</td>
+<td align="right">33</td>
+<td align="left">s5a04+CD15 FITCnegCD45 PEneg+GO-UPCWK13</td>
+<td align="right">0.0000000</td>
+<td align="right">-0.2830387</td>
+<td align="left">s5a04+CD15 FITC-CD45 PE-</td>
+<td align="left">5</td>
+<td align="left">4</td>
+<td align="left">12</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a05</td>
+<td align="left">rectangle</td>
+<td align="left">root</td>
+<td align="right">371</td>
+<td align="right">10410</td>
+<td align="left">s5a05+rectangle+GO-UPCWK13</td>
+<td align="right">3.5638809</td>
+<td align="right">0.6122996</td>
+<td align="left">s5a05+rectangle</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">19</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a05</td>
+<td align="left">CD15 FITC-CD45 PE+</td>
+<td align="left">rectangle</td>
+<td align="right">0</td>
+<td align="right">371</td>
+<td align="left">s5a05+CD15 FITCnegCD45 PEpos+GO-UPCWK13</td>
+<td align="right">0.0000000</td>
+<td align="right">-0.3904334</td>
+<td align="left">s5a05+CD15 FITC-CD45 PE+</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">19</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a05</td>
+<td align="left">CD15 FITC+CD45 PE+</td>
+<td align="left">rectangle</td>
+<td align="right">367</td>
+<td align="right">371</td>
+<td align="left">s5a05+CD15 FITCposCD45 PEpos+GO-UPCWK13</td>
+<td align="right">98.9218329</td>
+<td align="right">0.4124660</td>
+<td align="left">s5a05+CD15 FITC+CD45 PE+</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">19</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a05</td>
+<td align="left">CD15 FITC+CD45 PE-</td>
+<td align="left">rectangle</td>
+<td align="right">3</td>
+<td align="right">371</td>
+<td align="left">s5a05+CD15 FITCposCD45 PEneg+GO-UPCWK13</td>
+<td align="right">0.8086253</td>
+<td align="right">-0.4499432</td>
+<td align="left">s5a05+CD15 FITC+CD45 PE-</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">19</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a05</td>
+<td align="left">CD15 FITC-CD45 PE-</td>
+<td align="left">rectangle</td>
+<td align="right">1</td>
+<td align="right">371</td>
+<td align="left">s5a05+CD15 FITCnegCD45 PEneg+GO-UPCWK13</td>
+<td align="right">0.2695418</td>
+<td align="right">-0.2600620</td>
+<td align="left">s5a05+CD15 FITC-CD45 PE-</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">19</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a06</td>
+<td align="left">rectangle</td>
+<td align="left">root</td>
+<td align="right">45</td>
+<td align="right">3750</td>
+<td align="left">s5a06+rectangle+GO-UPCWK13</td>
+<td align="right">1.2000000</td>
+<td align="right">-0.3052791</td>
+<td align="left">s5a06+rectangle</td>
+<td align="left">5</td>
+<td align="left">6</td>
+<td align="left">26</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a06</td>
+<td align="left">CD15 FITC-CD45 PE+</td>
+<td align="left">rectangle</td>
+<td align="right">0</td>
+<td align="right">45</td>
+<td align="left">s5a06+CD15 FITCnegCD45 PEpos+GO-UPCWK13</td>
+<td align="right">0.0000000</td>
+<td align="right">-0.3904334</td>
+<td align="left">s5a06+CD15 FITC-CD45 PE+</td>
+<td align="left">5</td>
+<td align="left">6</td>
+<td align="left">26</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a06</td>
+<td align="left">CD15 FITC+CD45 PE+</td>
+<td align="left">rectangle</td>
+<td align="right">42</td>
+<td align="right">45</td>
+<td align="left">s5a06+CD15 FITCposCD45 PEpos+GO-UPCWK13</td>
+<td align="right">93.3333333</td>
+<td align="right">-0.0082636</td>
+<td align="left">s5a06+CD15 FITC+CD45 PE+</td>
+<td align="left">5</td>
+<td align="left">6</td>
+<td align="left">26</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a06</td>
+<td align="left">CD15 FITC+CD45 PE-</td>
+<td align="left">rectangle</td>
+<td align="right">3</td>
+<td align="right">45</td>
+<td align="left">s5a06+CD15 FITCposCD45 PEneg+GO-UPCWK13</td>
+<td align="right">6.6666667</td>
+<td align="right">1.1461407</td>
+<td align="left">s5a06+CD15 FITC+CD45 PE-</td>
+<td align="left">5</td>
+<td align="left">6</td>
+<td align="left">26</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a06</td>
+<td align="left">CD15 FITC-CD45 PE-</td>
+<td align="left">rectangle</td>
+<td align="right">0</td>
+<td align="right">45</td>
+<td align="left">s5a06+CD15 FITCnegCD45 PEneg+GO-UPCWK13</td>
+<td align="right">0.0000000</td>
+<td align="right">-0.2830387</td>
+<td align="left">s5a06+CD15 FITC-CD45 PE-</td>
+<td align="left">5</td>
+<td align="left">6</td>
+<td align="left">26</td>
+<td align="right">3</td>
+</tr>
 </tbody>
 </table>
 <p>Finally, we build a <code>populationExpressionObj</code> called <code>PEO</code> from the <code>GatingSet</code>. We limit our samples to</p>
@@ -911,7 +911,7 @@ PEO</code></pre>
 ##     initialize: function (annotation, expressionData, mapVar = NULL, checkIntegrity = TRUE, 
 ##     mapVar: name
 ##     markers: FSC-Height SSC-Height CD15 FITC CD45 PE CD14 PerCP FL2-A ...
-##     objId: PEO-JOWZD39
+##     objId: PEO-HPAJL82
 ##     populations: rectangle CD15 FITC-CD45 PE+ CD15 FITC+CD45 PE+ CD15 FIT ...
 ##     returnMergedData: function () 
 ##     setAnnotationDisplayOptions: function (annotCols) 
@@ -930,7 +930,7 @@ markers</code></pre>
 ## [7] &quot;CD33 APC&quot;          &quot;Time (51.20 sec.)&quot;</code></pre>
 <pre class="r"><code>PEO$setMarkers(markers[1:7])</code></pre>
 <p>Viewing the merged data table from <code>PEO</code>:</p>
-<pre class="r"><code>kable(PEO$returnMergedData()[1:20,])</code></pre>
+<pre class="r"><code>kable(PEO$returnMergedData()[1:30,])</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -1166,6 +1166,116 @@ markers</code></pre>
 <td align="left">-6</td>
 <td align="right">3</td>
 </tr>
+<tr class="odd">
+<td align="right">21</td>
+<td align="left">s5a01</td>
+<td align="left">FSC-Height</td>
+<td align="right">218</td>
+<td align="left">rectangle</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="right">22</td>
+<td align="left">s5a01</td>
+<td align="left">FSC-Height</td>
+<td align="right">223</td>
+<td align="left">rectangle</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="right">23</td>
+<td align="left">s5a01</td>
+<td align="left">FSC-Height</td>
+<td align="right">204</td>
+<td align="left">rectangle</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="right">24</td>
+<td align="left">s5a01</td>
+<td align="left">FSC-Height</td>
+<td align="right">209</td>
+<td align="left">rectangle</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="right">25</td>
+<td align="left">s5a01</td>
+<td align="left">FSC-Height</td>
+<td align="right">226</td>
+<td align="left">rectangle</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="right">26</td>
+<td align="left">s5a01</td>
+<td align="left">FSC-Height</td>
+<td align="right">247</td>
+<td align="left">rectangle</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="right">27</td>
+<td align="left">s5a01</td>
+<td align="left">FSC-Height</td>
+<td align="right">205</td>
+<td align="left">rectangle</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="right">28</td>
+<td align="left">s5a01</td>
+<td align="left">FSC-Height</td>
+<td align="right">206</td>
+<td align="left">rectangle</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="right">29</td>
+<td align="left">s5a01</td>
+<td align="left">FSC-Height</td>
+<td align="right">202</td>
+<td align="left">rectangle</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="right">30</td>
+<td align="left">s5a01</td>
+<td align="left">FSC-Height</td>
+<td align="right">300</td>
+<td align="left">rectangle</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
 </tbody>
 </table>
 <p>Save all objects into a new Rda:</p>
@@ -1196,12 +1306,6 @@ gatingModuleOutputGGFromGO(input, output, session, GO, annotation=annotationGO)<
 <p>And put this in your <code>ui.R</code>:</p>
 <pre class="r"><code>#this is put into a tabPanel
 gatingModuleUIFromGO(GO)</code></pre>
-</div>
-<div id="qco-modules" class="section level3">
-<h3>QCO Modules</h3>
-</div>
-<div id="section" class="section level3">
-<h3></h3>
 </div>
 </div>
 

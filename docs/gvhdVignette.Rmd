@@ -64,7 +64,7 @@ pD <- pData(parameters(gs@data[[1]]))
 
 qcMarkers <- pD$desc[-c(6)]
 
-#show first three markers
+#show markers in data
 qcMarkers
 
 library(flowDashboard)
@@ -96,8 +96,14 @@ kable(QCO$returnMergedData()[1:15,])
 
 Here we build the `gatingObj` from the `GatingSet`. We also create all of the relevant gating plots. Note that if you have a lot of samples and a lot of gates, the plotting can take a while. 
 
-```{r message=FALSE, warning=FALSE}
+```{r eval=FALSE}
+#run this code if you want to generate the images as well
 GO <- GOFromGatingSet(gs,imageDir = "data/gating/", makeGraphs = TRUE)
+```
+
+```{r}
+#graphs not generated in this vignette -run the above code if you want to
+GO <- GOFromGatingSet(gs,imageDir = "data/gating/", makeGraphs = FALSE, objId="GO-UPCWK13")
 
 ##show structure of gatingObj
 GO
@@ -106,7 +112,7 @@ GO
 Again, we can see the merged data table from `GO` by using the `returnMergedData()` method built into `GO`:
 
 ```{r}
-kable(GO$returnMergedData()[1:15,])
+kable(GO$returnMergedData()[1:30,])
 ```
 
 Finally, we build a `populationExpressionObj` called `PEO` from the `GatingSet`. We limit our samples to 
@@ -127,7 +133,7 @@ PEO$setMarkers(markers[1:7])
 Viewing the merged data table from `PEO`:
 
 ```{r}
-kable(PEO$returnMergedData()[1:20,])
+kable(PEO$returnMergedData()[1:30,])
 ```
 
 Save all objects into a new Rda:
@@ -177,9 +183,3 @@ And put this in your `ui.R`:
 #this is put into a tabPanel
 gatingModuleUIFromGO(GO)
 ```
-
-### QCO Modules
-
-
-
-### 
