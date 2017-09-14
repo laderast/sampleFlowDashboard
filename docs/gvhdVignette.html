@@ -201,7 +201,7 @@ QCO</code></pre>
 ##     initialize: function (annotation, qcData, mapVar = NULL, checkIntegrity = TRUE, 
 ##     mapVar: name
 ##     markers: FSC.Height SSC.Height CD15.FITC CD45.PE CD14.PerCP CD33. ...
-##     objId: QCO-RWFCG85
+##     objId: QCO-VEQAJ10
 ##     qcData: data.table, data.frame
 ##     returnMergedData: function () 
 ##     setAnnotationDisplayOptions: function (annotCols) 
@@ -220,7 +220,7 @@ QCO</code></pre>
 </ul>
 <p>Note that <code>QCO</code> has a slot called <code>objId</code>. This is the identifier used when using <code>QCO</code> in one of <code>flowDashboard</code>’s shiny modules. Having unique identfiers for each object helps to avoid namespace collisions in the shiny modules. By default, the identifer is randomly generated, though the user can override the default, either by specifying <code>objId</code> as an argument in the <code>QCOfromGatingSet()</code> function, or when invoking the modules separately. This <code>objId</code> lets the <code>flowDashboard</code> modules work together, or work separately (more on that later).</p>
 <pre class="r"><code>QCO$objId</code></pre>
-<pre><code>## [1] &quot;QCO-RWFCG85&quot;</code></pre>
+<pre><code>## [1] &quot;QCO-VEQAJ10&quot;</code></pre>
 <p>If we use the <code>returnMergedData()</code> method, we can see the underlying merged data/annotation. We keep these two data tables separate in order to save space (avoiding redundant information), and because different display methods require either the annotation or the underlying data.</p>
 <pre class="r"><code>kable(QCO$returnMergedData()[1:15,])</code></pre>
 <table>
@@ -239,9 +239,9 @@ QCO</code></pre>
 <tbody>
 <tr class="odd">
 <td align="left">s5a01</td>
-<td align="right">1</td>
+<td align="right">1679</td>
 <td align="left">FSC.Height</td>
-<td align="right">371</td>
+<td align="right">178</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -249,7 +249,77 @@ QCO</code></pre>
 </tr>
 <tr class="even">
 <td align="left">s5a01</td>
-<td align="right">2</td>
+<td align="right">3117</td>
+<td align="left">FSC.Height</td>
+<td align="right">350</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="right">1847</td>
+<td align="left">FSC.Height</td>
+<td align="right">400</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="right">1140</td>
+<td align="left">FSC.Height</td>
+<td align="right">197</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="right">1576</td>
+<td align="left">FSC.Height</td>
+<td align="right">61</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="right">2326</td>
+<td align="left">FSC.Height</td>
+<td align="right">274</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="right">2419</td>
+<td align="left">FSC.Height</td>
+<td align="right">594</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="right">2053</td>
+<td align="left">FSC.Height</td>
+<td align="right">621</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="right">1491</td>
 <td align="left">FSC.Height</td>
 <td align="right">190</td>
 <td align="left">5</td>
@@ -257,121 +327,11 @@ QCO</code></pre>
 <td align="left">-6</td>
 <td align="right">3</td>
 </tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="right">3</td>
-<td align="left">FSC.Height</td>
-<td align="right">141</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
 <tr class="even">
 <td align="left">s5a01</td>
-<td align="right">4</td>
-<td align="left">FSC.Height</td>
-<td align="right">167</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="right">5</td>
-<td align="left">FSC.Height</td>
-<td align="right">128</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="right">6</td>
-<td align="left">FSC.Height</td>
-<td align="right">208</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="right">7</td>
-<td align="left">FSC.Height</td>
-<td align="right">172</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="right">8</td>
-<td align="left">FSC.Height</td>
-<td align="right">236</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="right">9</td>
-<td align="left">FSC.Height</td>
-<td align="right">353</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="right">10</td>
-<td align="left">FSC.Height</td>
-<td align="right">85</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="right">11</td>
-<td align="left">FSC.Height</td>
-<td align="right">407</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="right">12</td>
-<td align="left">FSC.Height</td>
-<td align="right">233</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">s5a01</td>
-<td align="right">13</td>
-<td align="left">FSC.Height</td>
-<td align="right">234</td>
-<td align="left">5</td>
-<td align="left">1</td>
-<td align="left">-6</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">s5a01</td>
-<td align="right">14</td>
-<td align="left">FSC.Height</td>
 <td align="right">107</td>
+<td align="left">FSC.Height</td>
+<td align="right">60</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -379,9 +339,49 @@ QCO</code></pre>
 </tr>
 <tr class="odd">
 <td align="left">s5a01</td>
-<td align="right">15</td>
+<td align="right">2260</td>
 <td align="left">FSC.Height</td>
-<td align="right">130</td>
+<td align="right">183</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="right">492</td>
+<td align="left">FSC.Height</td>
+<td align="right">166</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="right">1091</td>
+<td align="left">FSC.Height</td>
+<td align="right">63</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">s5a01</td>
+<td align="right">405</td>
+<td align="left">FSC.Height</td>
+<td align="right">62</td>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">-6</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">s5a01</td>
+<td align="right">3245</td>
+<td align="left">FSC.Height</td>
+<td align="right">281</td>
 <td align="left">5</td>
 <td align="left">1</td>
 <td align="left">-6</td>
@@ -911,7 +911,7 @@ PEO</code></pre>
 ##     initialize: function (annotation, expressionData, mapVar = NULL, checkIntegrity = TRUE, 
 ##     mapVar: name
 ##     markers: FSC-Height SSC-Height CD15 FITC CD45 PE CD14 PerCP FL2-A ...
-##     objId: PEO-HPAJL82
+##     objId: PEO-DGWYR90
 ##     populations: rectangle CD15 FITC-CD45 PE+ CD15 FITC+CD45 PE+ CD15 FIT ...
 ##     returnMergedData: function () 
 ##     setAnnotationDisplayOptions: function (annotCols) 

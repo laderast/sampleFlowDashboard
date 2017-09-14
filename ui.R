@@ -19,7 +19,7 @@ shinyUI(dashboardPage(
                   conditionalPanel("input.sidebarmenu === 'DotPlot'",
                                    subsetModuleUICDO(GO, objId = goObjId2)),
 
-                 menuItem("Waterfall1", tabName="Waterfall", selected=FALSE),#,
+                 menuItem("Waterfall", tabName="Waterfall", selected=FALSE),#,
                  #conditionalPanel("input.sidebarmenu === 'Waterfall1'",
                   #                subsetModuleUICDO(GOadam))#,
 
