@@ -8,10 +8,11 @@ You can see the reference dashboard in action here: https://tladeras.shinyapps.i
 To run it, you will need to install the `flowDashboard` package: 
 
 ```
-source("http://www.bioconductor.org/biocLite.R")
-biocLite(c("flowCore", "flowWorkspace"), dependencies=TRUE)
-library(devtools)
-install_github("laderast/flowDashboard")
+if (!requireNamespace("BiocManager"))
+    install.packages("BiocManager")
+BiocManager::install(c("flowCore", "flowWorkspace"), dependencies=TRUE)
+install.packages("remotes")
+remotes::install_github("laderast/flowDashboard")
 ```
 
 `flowDashboard` modules take three different data objects as input (which are available in [`data/GvHD.rda`](data/GvHD.rda))
